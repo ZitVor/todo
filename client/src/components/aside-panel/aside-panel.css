@@ -1,0 +1,12 @@
+.aside-menu__header{
+    display: flex;
+}
+
+aside{
+    background-color: aquamarine;
+    
+}
+
+.aside-menu__item{
+    display: flex;
+}
