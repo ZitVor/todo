@@ -3,10 +3,13 @@
 }
 
 aside{
-    background-color: aquamarine;
-    
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
 }
 
 .aside-menu__item{
     display: flex;
+}
+.aside-menu__item-icon{
+    margin-right: 5px;
 }

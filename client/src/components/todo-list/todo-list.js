@@ -13,6 +13,7 @@ const TodoList=({todos})=>{
     
     return(
         <ul>
+            <h3>NameOfTask</h3>
             {elements}
         </ul>
     )

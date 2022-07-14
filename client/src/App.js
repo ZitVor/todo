@@ -2,23 +2,27 @@
 import './App.css';
 import TodoList from './components/todo-list/todo-list';
 import AsidePanel from './components/aside-panel/aside-panel';
-import Spinner from './components/spinner/spinner';
+import Task from './components/task/task';
+//import Spinner from './components/spinner/spinner';
 
-function App() {
-  const todoData=[
+function App() { 
+  const todosData=[
     {label:'Task1', important:true, id:1},
-    {label:'Task2', important:false, id:2},
-    {label:'Task3', important:true, id:3},
-    {label:'Task4', important:true, id:4},
+    {label:'Task2', important:true, id:2},
+    {label:'Task3', important:false, id:3}
   ]
+  const task={label:'Task1', important:true, id:1}
   return (
-    /*<div className="App">
+    
+      <div className="todo-app">
       <AsidePanel/>
-      <div>
-        <TodoList todos={todoData} />
+      <div className="main">
+      <TodoList todos={todosData}/>
       </div>
-    </div>*/
-    <Spinner/>
+      <div className='details-panel'>
+      <Task/>
+      </div>
+      </div>
   );
 }
 

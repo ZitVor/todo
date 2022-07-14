@@ -1,6 +1,6 @@
 import React from "react";
 import '../aside-panel/aside-panel.css'
-
+import {Link} from 'react-router-dom'
 const AsidePanel=()=>{
     
     return(
@@ -14,7 +14,8 @@ const AsidePanel=()=>{
                         <i class="bi bi-calendar"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Calendar
+                        <Link to="/calendar">Calendar</Link>
+                        
                     </div>         
                 </div>
                 <div className="aside-menu__item">
@@ -22,7 +23,7 @@ const AsidePanel=()=>{
                     <i class="bi bi-calendar-event"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Today
+                        <Link to="/today">Today</Link>
                     </div>         
                 </div>
                 <div className="aside-menu__item">
@@ -30,7 +31,7 @@ const AsidePanel=()=>{
                     <i class="bi bi-calendar2-week"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Next 7 days
+                        <Link to="/nextsevendays">Next 7 days</Link>
                     </div>         
                 </div>
                 <div className="aside-menu__item">
@@ -38,7 +39,7 @@ const AsidePanel=()=>{
                     <i class="bi bi-calendar3"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Next month
+                        <Link to="/nextmonth">Next month</Link>
                     </div>         
                 </div>
             </div>
@@ -99,7 +100,7 @@ const AsidePanel=()=>{
                 <i class="bi bi-check-square"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Completed
+                        <Link to="/completed">Completed</Link>                     
                     </div>         
                 </div>
                 <div className="aside-menu__item">
@@ -107,7 +108,7 @@ const AsidePanel=()=>{
                 <i class="bi bi-dash-square"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Won't do
+                    <Link to="/wontdo">Won't do</Link>
                     </div>         
                 </div>
                 <div className="aside-menu__item">
@@ -115,7 +116,7 @@ const AsidePanel=()=>{
                 <i class="bi bi-trash-fill"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Trash
+                    <Link to="/trash">Trash</Link>
                     </div>         
                 </div>
                 <div className="aside-menu__item">
@@ -123,7 +124,7 @@ const AsidePanel=()=>{
                     <i class="bi bi-graph-up-arrow"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Analitica
+                    <Link to="/analitica">Analitica</Link>
                     </div>                
                 </div>
                 <div className="aside-menu__item">
@@ -131,7 +132,7 @@ const AsidePanel=()=>{
                     <i class="bi bi-search-heart"></i>
                     </div>
                     <div className="aside-menu__item-label">
-                        Search
+                    <Link to="/search">Search</Link>
                     </div>                
                 </div>
             </div>
