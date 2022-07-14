@@ -6,7 +6,6 @@ const AsidePanel=()=>{
     return(
         <aside className="aside-menu">
             <div className="aside-menu__header">
-
             </div>
             <div className="aside-menu__list">
                 <div className="aside-menu__item">
