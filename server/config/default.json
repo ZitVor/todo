@@ -1,4 +1,6 @@
 {
     "port": 5000,
-    "mongoUri": "mongodb+srv://zitvor:1234@cluster0.fhfnm.mongodb.net/?retryWrites=true&w=majority"
+    "jwtSecret":"secret",
+    "mongoUri": "mongodb+srv://zitvor:1234@cluster0.fhfnm.mongodb.net/?retryWrites=true&w=majority",
+    "baseUrl": "http://localhost:5000"
 }

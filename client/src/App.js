@@ -1,24 +1,42 @@
+ import './App.css';
+import AsidePanel from './components/app-page/aside-panel/aside-panel';
+import {Registration} from './components/registration/registration'
+import { 
+  Route,
+  Router,
+  Routes,
+  BrowserRouter
+} from 'react-router-dom';
+import { useState } from 'react';
+import Login from './components/login-page/login-page';
 
-import './App.css';
-import TodoList from './components/todo-list/todo-list';
-import AsidePanel from './components/aside-panel/aside-panel';
-import Task from './components/task/task';
-import { BrowserRouter, Link, Route, Routes} from 'react-router-dom';
-import Header from './header/header';
-import LandingPage from './components/landing-page/landing-page';
-//import Spinner from './components/spinner/spinner';
+import LoginPage from './components/login-page/login-page';
+import Navigation from './components/navigation/Navigation';
 
 function App(){ 
 
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
   return(
-    <div className='App'>  
-        <h1>Protected Route</h1>
+    
+      <div className='App'>
+      <main>
+        <Navigation/>
         <Routes>
-        <Route  path='/'  element={<LandingPage/>}/>
-        <Route  path='aside' element={<AsidePanel/>}/>
-        <Route path='*' element={() => "404 not found"}/>
+          <Route path="/asidepanel" element={<AsidePanel/>}/>
+          <Route path="login" element={<Login/>}/>
+          <Route path="registration" element={<Registration/>}/>
+            <Route
+              path="*"
+                element={
+                <main style={{ padding: "1rem" }}>
+                  <p>There's nothing here!</p>
+                </main>
+      }
+    />
         </Routes>
-    </div>
+      </main>
+      </div>
   )
 }
 

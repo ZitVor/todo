@@ -1,63 +1,67 @@
-import React, { useState } from "react";
 
-const Registration = () => {
-    const [email, setEmail] =  useState('')
-    const [password, setPassword] = useState('')
-    const [emailDirty, setEmailDirty] = useState(false)
-    const [passwordDirty, setPasswordDirty] = useState(false)
-    const [emailError, setEmailError] = useState('Email cannot be empty')
-    const [passwordError, setPaswordError] = useState('Password cannot be empty')
+import React, {useState} from 'react'
+import {useHttp} from '../../hooks/http.hooks'
 
-    const emailHandler = (e) =>{
-        setEmail(e.target.value)
-        const re =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    
-        if (!re.test(String(e.target.value).toLowerCase())){
-            setEmailError('Uncorrected email')
-        }
-        else {
-            setEmailError("")
-        }
+export const Registration = () =>{ 
+    const {request} = useHttp()
+    const [form, setForm] = useState({
+      email: '', password: ''
+    })
+   
+    const changeHandler = event => {
+        setForm({ ...form, [event.target.name]: event.target.value })
+      }
+      const registerHandler = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/register',{
+                method: "Post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: `{"email":"${form.email}","password":"${form.password}"}` // body data type must match "Content-Type" header
+              });
+          //const data = await request('/api/auth/register', 'POST', {form})
+         // console.log(data.message)
+        } catch (e) {}
     }
-    const passwordHandler = (e) =>{
-        setPassword(e.target.value)
-        if(e.target.value.length < 3 || e.target.value.length >8){
-            setPaswordError('Password must be longer than 3 and les than 8')
-            if(!e.target.value){
-                setPaswordError('PAssword cannot be short')
-            }
-            else{
-                setPaswordError('')
-            }
-        }
+    const submitHandler = (e) => {
+        e.preventDefault()
     }
-
-    const blurHandler =(e)=>{
-        // eslint-disable-next-line default-case
-        switch (e.target.name){
-            case 'email':
-                setEmailDirty(true);
-                break;
-            case 'password':
-                setPasswordDirty(true);
-                break;
-        }
-    }
-
+    // function emailChange(e){
+    //     setEmail(e.target.value)
+    // }
+    // function passwordChange(e){
+    //     setPassword(e.target.value)
+    // }
 
     return(
-        <div className="login">
-            <form>
-                <h3>Login:</h3>
-                {(emailDirty && emailError) && <div style={{color:'tomato'}}>{emailError}</div>}
-                <input onChange={e=> emailHandler(e)} onBlur={e=>blurHandler(e)} value={email}/>
-                <h3>Password</h3>
-                {(passwordDirty && passwordError) && <div style={{color:'red'}}>{passwordError}</div>}
-                <input onChange={e=> passwordHandler(e)} value={password} onBlur={e=>blurHandler(e)} name='password' type='password'/>
-                <button type='submit'>Login</button>
-            </form>
-        </div>
+        <form className="loginForm" onSubmit={submitHandler}>
+            <h2>Регистрация</h2>
+            <div>
+            <input 
+            id="email"
+            type="text"
+            name="email"
+            placeholder="email"value={form.email}
+            onChange={changeHandler}
+            />
+            </div>
+            <div>
+            <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="password"
+            value={form.password}
+            onChange={changeHandler}
+            />
+            </div>
+            <div>
+                <button 
+                className="authorization_btn"
+                 onClick={registerHandler}
+                 >Registration</button>
+            </div>
+        </form>
     )
-}
-
-export default Registration
+    }
