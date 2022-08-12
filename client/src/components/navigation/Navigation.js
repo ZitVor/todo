@@ -1,15 +1,16 @@
 import React from "react";
 import {Link, Routes} from 'react-router-dom'
 
-const Navigation=({isLoggedIn, setIsLoggedIn})=>{
+const Navigation=({isAutentificated, setIsAutentificated})=>{
+    
     const handleLogOut = () => {
-      setIsLoggedIn(false);
+      setIsAutentificated(false);
     }
 
     return(
       <header>
         {
-          isLoggedIn ? 
+          isAutentificated ? 
           <nav>
             <ul>
               <li><Link onClick={handleLogOut}
@@ -19,6 +20,7 @@ const Navigation=({isLoggedIn, setIsLoggedIn})=>{
           : 
           <nav>
             <ul>
+              <li><Link to="/about">About</Link></li>
               <li><Link to="/login">Login</Link></li>
               <li><Link to="/registration">Registration</Link>
 </li>

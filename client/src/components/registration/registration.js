@@ -1,9 +1,11 @@
 
 import React, {useState} from 'react'
+import { useAuth } from '../../hooks/auth.hook'
 import {useHttp} from '../../hooks/http.hooks'
 
 export const Registration = () =>{ 
     const {request} = useHttp()
+    
     const [form, setForm] = useState({
       email: '', password: ''
     })
@@ -18,21 +20,14 @@ export const Registration = () =>{
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: `{"email":"${form.email}","password":"${form.password}"}` // body data type must match "Content-Type" header
+                body: `{"email":"${form.email}","password":"${form.password}"}` 
               });
-          //const data = await request('/api/auth/register', 'POST', {form})
-         // console.log(data.message)
+            alert(response.email)
         } catch (e) {}
     }
     const submitHandler = (e) => {
         e.preventDefault()
     }
-    // function emailChange(e){
-    //     setEmail(e.target.value)
-    // }
-    // function passwordChange(e){
-    //     setPassword(e.target.value)
-    // }
 
     return(
         <form className="loginForm" onSubmit={submitHandler}>

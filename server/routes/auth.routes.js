@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
       password:password
     })
     console.log("User");
-    return res.status(200).json(user)
+    return res.status(200)
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
@@ -38,11 +38,12 @@ router.options('/register', async (req, res) => {
 router.post(
   '/login',
   async (req, res) => {
+    console.log(req.body)
   try { 
 
     const {email, password} = req.body
-
     const user = await User.findOne({ email })
+    console.log(req.body)
 
     if (!user) {
       return res.status(400).json({ message: 'Пользователь не найден' })
@@ -51,19 +52,26 @@ router.post(
     if(password!=user.password){
       return res.status(400).json({ message: 'Неверный пароль, попробуйте снова' })
     }
-
+    
     const token = jwt.sign(
       { userId: user.id },
       config.get('jwtSecret'),
       { expiresIn: '1h' }
     )
-
-    res.json({ token, userId: user.id })
+    //console.log(user.token)
+    res.json({ token, userId: user.id }).status(200);
 
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 })
+// router.options('/login', async (req, res) => { 
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS, POST');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//   res.header('Access-Control-Allow-Credentials', true);
+//   res.send();
+// })
 
 
 module.exports = router
