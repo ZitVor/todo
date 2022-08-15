@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import '../aside-panel/aside-panel.css'
 import {Link} from 'react-router-dom'
+import { AuthContext } from "../../../context/AuthContext";
+import { useAuth } from "../../../hooks/auth.hook";
+import Modal from "../../modal/modal"
+import CreateList from "../../create-list/create-list";
 const AsidePanel=()=>{
-    
+    const auth = useContext(AuthContext)
+    const [isOpen, setIsOpen] = useState(false)
+    const { login, logout } = useAuth()
+    const logoutHandler = async (req,res) => {
+        auth.logout()
+    }
+    const modalHandler = async(req,res) => {
+        if (isOpen==false){
+            setIsOpen(true)
+        }
+        else{
+            setIsOpen(false)
+        }
+    }
     return(
         <aside className="aside-menu">
             <div className="aside-menu__header">
+                <div className="user">                               
+                    <AuthContext.Consumer>
+                    {value => <div className="user__avatar">User:{value.userId}</div>}
+                    </AuthContext.Consumer>
+                    
+                    <div className="user__name"></div>
+                </div>
             </div>
             <div className="aside-menu__list">
                 <div className="aside-menu__item">
@@ -43,46 +67,17 @@ const AsidePanel=()=>{
                 </div>
             </div>
             <div className="aside-menu__list list__list">
-                <div className="aside-menu__header">
+                <div className="aside-menu__header lists-list">
                     <div className="aside-menu__list-label">
                         Lists
                     </div>
                     <div className="aside-menu__list-button">
-                    <i class="bi bi-plus"></i>
-                    </div>
-                </div>
-                <div className="aside-menu-elements">
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
-                </div>                
-            </div>
-            <div className="aside-menu__list list__list">
-                <div className="aside-menu__header">
-                    <div className="aside-menu__list-label">
-                        Tags
-                    </div>
-                    <div className="aside-menu__list-button">
-                    <i class="bi bi-plus"></i>
-                    </div>
-                </div>
-                <div className="aside-menu-elements">
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>
-                </div>                
-            </div>
-            <div className="aside-menu__list list__list">
-                <div className="aside-menu__header">
-                    <div className="aside-menu__list-label">
-                        Filters
-                    </div>
-                    <div className="aside-menu__list-button">
-                    <i class="bi bi-plus"></i>
+                        <button onClick={modalHandler}>
+                        <i class="bi bi-plus"></i>
+                        </button>
+                        <Modal open={isOpen} onClose={()=>setIsOpen(false)}>
+                            <CreateList/>
+                        </Modal>
                     </div>
                 </div>
                 <div className="aside-menu-elements">
@@ -134,7 +129,15 @@ const AsidePanel=()=>{
                     <Link to="/search">Search</Link>
                     </div>                
                 </div>
-            </div>
+                <div className="aside-menu__item ">
+                    <div className="aside-menu__item-icon">
+                    <i class="bi bi-box-arrow-in-left"></i>
+                    </div>
+                    <div className="aside-menu__item-label ">
+                    <Link to="/login" onClick={logoutHandler}>Logout</Link>
+                    </div>                
+                </div>
+            </div>     
         </aside>
     )
 }
