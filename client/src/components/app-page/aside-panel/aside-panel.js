@@ -72,7 +72,7 @@ const AsidePanel=()=>{
                         Lists
                     </div>
                     <div className="aside-menu__list-button">
-                        <button onClick={modalHandler}>
+                        <button onClick={() => setIsOpen(true)}>
                         <i class="bi bi-plus"></i>
                         </button>
                         <Modal open={isOpen} onClose={()=>setIsOpen(false)}>
