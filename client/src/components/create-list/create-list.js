@@ -1,24 +1,28 @@
-import { Component, useState } from "react";
+import { Component, useContext, useState } from "react";
 import { ReactDOM } from "react";
 import {createPortal} from 'react-dom'
-
+import { AuthContext } from "../../context/AuthContext";
+import {useHttp} from '../../hooks/http.hooks'
 const CreateList = () => {
-    const [task,taskName] = useState()
-
+    const [taskName,setTaskName] = useState('')
+    const auth = useContext(AuthContext)
+    const {request} = useHttp()
     const handleCreateTask = (e) => {
         e.preventDefault()
      }
     
-    const submitHandler = async (req,res) => { 
+    const createListHandler = async () => { 
         try{
-            //!!!!!!!!!!!!!!
-            let a = await fetch('http://localhost:5000/api/auth/createlist',{ method: "Post",
-            headers: {
-                "Content-Type": "application/json"
-            },body: task
-            }).then(res => 
-                res.json()
-                )
+            const data = await request('http://localhost:5000/api/list/createlist', 'POST', {name:taskName, owner:auth.userId}, {
+                Authorization: `Bearer ${auth.token}`
+              })
+            //   const data = await fetch('http://localhost:5000/api/list/createlist',{
+            //     method:'Post',
+            //     header:{
+            //         "Content-Type":"application/json"
+            //     },
+            //     body:`{"name":"${taskName}","owner":"${auth.userId}"}`
+            // }).then(res => res.json)
         }   
         catch(e){
             console.log(e)
@@ -34,13 +38,14 @@ const CreateList = () => {
                     id="list"
                     type="text"
                     name="list"
-                    placeholder="list name"value={task}
+                    placeholder="list name"
+                    defaultValue={taskName}
                     // onChange={changeHandler}
             />
                 </div>
                 <div>
                     <button className="blackBtn" type="submit"
-                    onClick={submitHandler}>
+                    onClick={createListHandler}>
                         Submit
                     </button>
                 </div>

@@ -43,6 +43,15 @@ const AsidePanel=()=>{
                 </div>
                 <div className="aside-menu__item">
                     <div className="aside-menu__item-icon">
+                    <i class="bi bi-balloon-heart-fill"></i>
+                    </div>
+                    <div className="aside-menu__item-label">
+                        <Link to="/all">All</Link>
+                        
+                    </div>         
+                </div>
+                <div className="aside-menu__item">
+                    <div className="aside-menu__item-icon">
                     <i class="bi bi-calendar-event"></i>
                     </div>
                     <div className="aside-menu__item-label">

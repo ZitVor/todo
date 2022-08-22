@@ -5,6 +5,7 @@ const { mongoose } = require('mongoose')
 var bodyParser = require('body-parser');
 const app = express() 
 
+app.use('/api/list', require('./routes/list.routes'))
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
